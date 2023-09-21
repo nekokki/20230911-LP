@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap");
+
+$font-color: #565956;
+$font-ja: "Noto Sans JP", sans-serif;
+$font-en: "Hind Siliguri", sans-serif;
+$main-color: #669988;
+$base-color: #f2f4f1;
+$base-color-light: #fff;
+$accent-color: #998866;
+$button-color: #0e0909;
+
+$layout-width-inner: 1280px;
+
+//ブレークポイント
+$breakpoints: (
+  "sp": "(max-width: 767px)",
+  "tab": "(min-width: 768px) and (max-width: #{$layout-width-inner - 1px})",
+  "pc": "(min-width: #{$layout-width-inner})",
+) !default;
+
+//メディアクエリ
+@mixin mq($breakpoint: sp) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+
+/*----------------------
+reset
+----------------------*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  color: $font-color;
+}
+
+body {
+  font-family: $font-ja;
+  font-size: 16px;
+  line-height: 1.6;
+  background: $base-color-light;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+a {
+  text-decoration: none;
+  color: $font-color;
+  cursor: pointer;
+  position: relative;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.flex {
+  display: flex;
+  @include mq("sp") {
+    display: block;
+  }
+}
+
+.flex-reverse {
+  display: flex;
+  flex-direction: row-reverse;
+  @include mq("sp") {
+    display: block;
+  }
+}
+
+h2 {
+  font-size: 40px;
+  font-weight: 700;
+  text-align: center;
+  position: relative;
+  margin-bottom: 16px;
+
+  &::after {
+    content: "";
+    background: $accent-color;
+    height: 1px;
+    width: 60px;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+h1 {
+  font-weight: 1000;
+  text-align: center;
+  font-size: 64px;
+  color: #eaeaea;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+.pc {
+  @include mq("sp") {
+    display: none !important;
+  }
+}
+
+.mqsp {
+  display: none !important;
+  @include mq("tab") {
+    display: none !important;
+  }
+  @include mq("sp") {
+    display: block !important;
+  }
+}
+
+.mqtab {
+  display: none;
+  @include mq("tab") {
+    display: block !important;
+  }
+  @include mq("sp") {
+    display: block;
+  }
+}
